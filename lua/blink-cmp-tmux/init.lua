@@ -46,7 +46,7 @@ function tmux:get_pane_content(pane_id)
 		table.insert(cmd, "-S-")
 	end
 
-	return vim.system(cmd, { text = true }):wait().stdout
+	return vim.system(cmd, { text = true }):wait().stdout or ""
 end
 
 ---@return string[]
