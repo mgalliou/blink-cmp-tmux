@@ -1,8 +1,8 @@
 ---@class blink-cmp-tmux.Opts
----@field panes string
----@field capture_history boolean
----@field triggered_only boolean
----@field trigger_chars string[]
+---@field panes? 'window' | 'session' | 'all'
+---@field capture_history? boolean
+---@field triggered_only? boolean
+---@field trigger_chars? string[]
 
 ---@type blink-cmp-tmux.Opts
 local default_opts = {
