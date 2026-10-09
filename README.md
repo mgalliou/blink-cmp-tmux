@@ -10,6 +10,9 @@ plugin.
   of [tmux] panes.
 - Supports capturing content from all panes or only the current pane.
 - Allows capturing the history of panes for more comprehensive suggestions.
+- Never holds up typing: panes are read in the background, one after the
+  other, with a deadline and a cap on what is read; a completion is answered
+  from the words kept.
 - Configurable trigger characters to activate completions.
 
 ## Requirements
@@ -48,7 +51,15 @@ Using [lazy.nvim](https://github.com/folke/lazy.nvim)
             -- only suggest completions from `tmux` if the `trigger_chars` are
             -- used
             triggered_only = false,
-            trigger_chars = { "." }
+            trigger_chars = { "." },
+            -- seconds between two reads of the panes
+            min_update_period = 5,
+            -- seconds a word stays once its pane no longer shows it
+            item_lifetime = 60,
+            -- milliseconds a tmux command may take
+            timeout = 2000,
+            -- bytes read of one pane at most
+            max_bytes = 1024 * 1024,
           },
         },
       }
